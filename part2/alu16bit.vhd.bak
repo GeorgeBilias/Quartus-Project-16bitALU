@@ -1,0 +1,12 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use work.components2.all;
+
+entity alu16bit is
+
+
+end alu16bit;
+
+architecture Aralu16bit of alu16bit is
+
+end Aralu16bit;

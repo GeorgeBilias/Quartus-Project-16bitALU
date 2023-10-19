@@ -1,0 +1,34 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+--entity NotA
+
+entity NotA is
+  port(a : in std_logic;
+       nota : out std_logic);
+end NotA;
+
+--architecture of NotA
+
+architecture arNotA of NotA is
+ begin
+  nota <= not a;
+end ArNotA;
+
+--entity of multiplexer 2to1 for A aka AInverter
+
+entity mymux2to1a is
+ port(a,nota : in std_logic;
+     AInvert: in std_logic_vector(1 downto 0);
+     finala : out std_logic);
+end mymux2to1a;
+
+--architecture of multiplexer 2to1 for A aka AInverter
+
+architecture Armymux2to1a of mymux2to1a is
+ begin
+  with AInvert select
+   finala <= a when "00",
+	  nota when "01";
+end Armymux2to1a;
+  

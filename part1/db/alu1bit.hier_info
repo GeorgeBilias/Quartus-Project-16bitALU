@@ -1,0 +1,87 @@
+|alu1bit
+a => entNotA:u0.a
+a => mymux2to1a:u1.a
+b => entNotB:u2.b
+b => mymux2to1b:u3.b
+CarryIn => FullAdder:u6.CarryIn
+AInvert => mymux2to1a:u1.AInvert
+BInvert => mymux2to1b:u3.BInvert
+Operation[0] => mux4to1:u8.Operation[0]
+Operation[1] => mux4to1:u8.Operation[1]
+Result <= mux4to1:u8.Result
+CarryOut <= FullAdder:u6.CarryOut
+
+
+|alu1bit|entNotA:u0
+a => nota.DATAIN
+nota <= a.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|alu1bit|mymux2to1a:u1
+a => finala.DATAB
+nota => finala.DATAA
+AInvert => finala.OUTPUTSELECT
+finala <= finala.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|alu1bit|entNotB:u2
+b => notb.DATAIN
+notb <= b.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|alu1bit|mymux2to1b:u3
+b => finalb.DATAB
+notb => finalb.DATAA
+BInvert => finalb.OUTPUTSELECT
+finalb <= finalb.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|alu1bit|AndGate:u4
+finala => outAnd.IN0
+finalb => outAnd.IN1
+outAnd <= outAnd.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|alu1bit|OrGate:u5
+finala => outOr.IN0
+finalb => outOr.IN1
+outOr <= outOr.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|alu1bit|FullAdder:u6
+CarryIn => CarryOut.IN0
+CarryIn => CarryOut.IN0
+CarryIn => sum.IN1
+CarryIn => sum.IN1
+CarryIn => sum.IN1
+CarryIn => sum.IN1
+finala => CarryOut.IN1
+finala => sum.IN0
+finala => sum.IN0
+finala => sum.IN0
+finala => sum.IN0
+finalb => CarryOut.IN1
+finalb => sum.IN1
+finalb => sum.IN1
+finalb => sum.IN1
+finalb => sum.IN1
+sum <= sum.DB_MAX_OUTPUT_PORT_TYPE
+CarryOut <= CarryOut.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|alu1bit|XorGate:u7
+finala => outXor.IN0
+finalb => outXor.IN1
+outXor <= outXor.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|alu1bit|mux4to1:u8
+outAnd => Mux0.IN0
+outOr => Mux0.IN1
+sum => Mux0.IN2
+outXor => Mux0.IN3
+Operation[0] => Mux0.IN5
+Operation[1] => Mux0.IN4
+Result <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+
+

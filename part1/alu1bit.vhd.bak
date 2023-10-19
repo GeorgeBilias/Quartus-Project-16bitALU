@@ -1,0 +1,16 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use work.components.all;
+
+entity alu1bit is
+ port(a,b : in std_logic;
+      AInvert: in std_logic_vector(1 downto 0));
+end alu1bit;
+
+architecture Aralu1bit of alu1bit is
+ signal a,nota : in std_logic;
+ signal AInvert: in std_logic_vector(1 downto 0);
+ begin
+  u0: NotA port map(a,nota);
+  u1: mymux2to1a port map(a,nota,AInvert,finala);
+ end Aralu1bit;
